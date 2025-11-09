@@ -1,0 +1,68 @@
+\documentclass[12pt]{article}
+\usepackage[paperheight=25cm,paperwidth=17cm,top=1.5cm,bottom=1.cm,left=1cm,right=1cm]{geometry}
+\usepackage{fancyhdr}
+\renewcommand{\subsectionmark}[1]{\markright{#1}}
+
+\fancypagestyle{main}{
+\fancyhf{}
+\addtolength{\topmargin}{-3.18243pt}
+\setlength{\headsep}{3pt}
+\fancyhead[R]{  % right header mark
+\begin{tikzpicture} 
+\node[font=\bfseries] at (0,0) {\footnotesize\thepage}; 
+\end{tikzpicture}
+}  % right header mark
+}
+
+\renewcommand{\footrulewidth}{0pt}% default is 0pt
+\renewcommand{\headrulewidth}{0pt}% default is 0pt
+
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{23.5pt}
+%\usepackage{mathptmx}
+\usepackage{domitian}
+\usepackage[OT1]{fontenc}
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+\usepackage[tbtags]{amsmath}
+\usepackage{amssymb}
+\allowdisplaybreaks
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{bm}
+\usepackage{fdsymbol}
+\usepackage[skip=3ex, indent=0pt]{parskip}
+\usepackage{tensor}
+\usepackage{physics}
+%\usepackage{physics2}
+%\usephysicsmodule{ab}
+\usepackage{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fit}
+\NewDocumentCommand{\mtrx}{m}{
+\begin{bmatrix}#1\end{bmatrix}
+}
+\def\vx{\vb*{x}}
+\def\vy{\vb*{y}}
+\def\vz{\vb*{z}}
+\def\cM{{\cal M}}
+\def\cX{{\cal X}}
+\def\cB{{\cal B}}
+\def\cV{{\cal V}}
+\def\df{{\sf d}}
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\F{\mathbb{F}}
+
+\begin{document}
+\pagestyle{main}
+$\vb*{z}$
+Define a bilinear map $E: \cV \times \cV \to \cV$ with the following properties:
+\begin{enumerate}[i.,itemsep=0ex,parsep=1ex]
+    \item Bilinear property: $E(a\vx+b\vy,\vz)=aE(\vx,\vz)+bE(\vy,\vz)$,
+    $E(\vx,a\vy+b\vz)=aE(\vx,\vy)+bE(\vx,\vz)$ where $\vx,\vy,\vz \in \cV$ and $a,b \in \F$. \label{num:bilinear}
+    \item Antisymmetric property: $E(\vx,\vy)=-E(\vy,\vx)$. \label{num:antisymmetric}
+    \item Orthogonal property: $g(E(\vx,\vy),\vx)=g(E(\vx,\vy),\vy)=0$ where $g: \cV \times \cV \to \F$ is the non-degenerate, bilinear form that defines the inner product between two vectors. \label{num:orthogonal}
+\end{enumerate}
+\end{document}
