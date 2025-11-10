@@ -43,6 +43,9 @@
 \NewDocumentCommand{\mtrx}{m}{
 \begin{bmatrix}#1\end{bmatrix}
 }
+\def\ve{\vb*{e}}
+\def\vh{\vb*{h}}
+\def\vu{\vb*{u}}
 \def\vx{\vb*{x}}
 \def\vy{\vb*{y}}
 \def\vz{\vb*{z}}
@@ -57,12 +60,176 @@
 
 \begin{document}
 \pagestyle{main}
-$\vb*{z}$
-Define a bilinear map $E: \cV \times \cV \to \cV$ with the following properties:
-\begin{enumerate}[i.,itemsep=0ex,parsep=1ex]
+Most of the material presented here is taken from \cite{elduque2004vector}.
+
+Given a finite dimensional vector space $\cV$ over a field $\F$ with characteristic zero and with an inner product $g: \cV \times \cV \to \F$ 
+define a bilinear map $E: \cV \times \cV \to \cV$ with the following properties:
+\begin{enumerate}[I,itemsep=0ex,parsep=1ex]
     \item Bilinear property: $E(a\vx+b\vy,\vz)=aE(\vx,\vz)+bE(\vy,\vz)$,
     $E(\vx,a\vy+b\vz)=aE(\vx,\vy)+bE(\vx,\vz)$ where $\vx,\vy,\vz \in \cV$ and $a,b \in \F$. \label{num:bilinear}
-    \item Antisymmetric property: $E(\vx,\vy)=-E(\vy,\vx)$. \label{num:antisymmetric}
-    \item Orthogonal property: $g(E(\vx,\vy),\vx)=g(E(\vx,\vy),\vy)=0$ where $g: \cV \times \cV \to \F$ is the non-degenerate, bilinear form that defines the inner product between two vectors. \label{num:orthogonal}
+    \item Antisymmetric property: $g\qty(E(\vx,\vy),E(\vx,\vy))=\mqty|g(\vx,\vx) & g(\vx,\vy) \\ g(\vy,\vx) & g(\vy,\vy)|$ for all $\vx,\vy \in \cV$. 
+    This is an expression of the antisymmetric property since \label{num:antisymmetric}
+    \begin{align*}
+    g\qty(E(\vx,\vy),E(\vy,\vx)) & =\mqty|g(\vx,\vy) & g(\vx,\vx) \\ g(\vy,\vy) & g(\vy,\vx)| 
+    =-\mqty|g(\vx,\vx) & g(\vx,\vy) \\ g(\vy,\vx) & g(\vy,\vy)| \\
+    & =-g\qty(E(\vx,\vy),E(\vx,\vy))=g\qty(E(\vx,\vy),-E(\vx,\vy))
+    \end{align*}
+    and so we must have $E(\vx,\vy)=-E(\vy,\vx)$.
+    \item Orthogonal property: $g(E(\vx,\vy),\vx)=g(E(\vx,\vy),\vy)=0$. \label{num:orthogonal}
 \end{enumerate}
+We can use the bilinear map $E$ to induce a linear map $L_x: \cV \to \cV$ as follows: 
+\[
+L_x(\vy)=E(\vx,\vy), \; \text{for all $\vy \in \cV$}.
+\]
+This follows from (\ref{num:bilinear}). We note that 
+\[
+L_x^2(\vy)=L_xE(\vx,\vy)=E(\vx,E(\vx,\vy)).
+\]
+From (\ref{num:antisymmetric}) we have  
+\begin{align*}
+g(E(\vx,E(\vx,\vy)),E(\vx,E(\vx,\vy))) & = \mqty|g(\vx,\vx) & g(\vx,E(\vx,\vy)) \\ g(E(\vx,\vy), \vx) & g(E(\vx,\vy),E(\vx,\vy))| \\
+& = \mqty|g(\vx,\vx) & 0 \\ 0 & g(E(\vx,\vy),E(\vx,\vy))| \\
+& = g(\vx,\vx) g(E(\vx,\vy),E(\vx,\vy)) \\
+& = g(\vx,\vx) \qty(g(\vx,\vx)g(\vy,\vy)-g(\vx,\vy)^2) \\
+& = g(\vx,\vx)^2 g(\vy,\vy) - g(\vx,\vy)^2 g(\vx,\vx) \\
+& = g(\vx,\vx)^2 g(\vy,\vy) + g(\vx,\vy)^2 g(\vx,\vx) \\
+& \kern2ex - 2 g(\vx,\vy)^2 g(\vx,\vx) \\
+& = g(g(\vx,\vy)\vx-g(\vx,\vx)\vy,g(\vx,\vy)\vx-g(\vx,\vx)\vy).
+\end{align*}
+Therefore 
+\[
+E(\vx,E(\vx,\vy)) = g(\vx,\vy)\vx-g(\vx,\vx)\vy
+\]
+and
+\[
+L_x^2(\vy)=g(\vx,\vy)\vx-g(\vx,\vx)\vy.
+\]
+
+The tensor product $\vx \otimes \vy$ induces a linear map $L_{x \otimes y}: \cV \to \cV$ defined as 
+\begin{align*}
+(\vx \otimes \vy)(\vz) & = (x^i \ve_i \otimes y^j \ve_j) (\vz) =x^iy^j (\ve_i \otimes \ve_j)(\vz) \\
+& = x^iy^j z_j \ve_i = x^iy^j z^k g_{jk} \ve_i \\
+& = g(\vy,\vz) x^i \ve_i = g(\vy,\vz) \vx, \; \text{for all $\vz \in \cV$}. 
+\end{align*}
+From these definitions we can also generate the composite maps 
+\[
+L_{x \otimes y}L_z (\vu) = L_{x \otimes y} (E(\vz,\vu))=g(\vy,E(\vz,\vu))\vx 
+\]
+and
+\[
+L_{x}L_{y \otimes z} (\vu) = L_{x}(g(\vz,\vu)\vy)=g(\vz,\vu)E(\vx,\vy)=L_{E(x,y)\otimes z} \vu.
+\]
+Note that since 
+\[
+g(\vx+\vy,E(\vx+\vy,\vz)) = 0
+\]
+(using property (\ref{num:orthogonal})) we have 
+\begin{align*}
+    g(\vx+\vy,E(\vx+\vy,\vz)) & = g(\vx+\vy,E(\vx,\vz)+E(\vy,\vz)) \\
+    & = g(\vx,E(\vx,\vz))+g(\vy,E(\vx,\vz))+g(\vx,E(\vy,\vz))+g(\vy,E(\vy,\vz)) \\
+    & =  g(\vy,E(\vx,\vz)) + g(\vx,E(\vy,\vz)) = 0 .
+\end{align*}
+So we obtain 
+\[
+g(\vy,E(\vz,\vx)) = g(\vx,E(\vy,\vz))
+\]
+using the antisymmetric property of $E$. In the same way we can prove that this property is cyclic, i.e.
+\[
+g(\vx,E(\vy,\vz)) = g(\vy,E(\vz,\vx)) = g(\vz,E(\vx,\vy)).
+\] 
+This means that we can write 
+\[
+g(\vy,E(\vz,\vu)) = g(\vz,E(\vu,\vy))=g(\vu,E(\vy,\vz))
+\]
+and so
+\[
+L_{x \otimes y}L_z (\vu) = g(\vu,E(\vy,\vz))\vx = L_{x \otimes E(y,z)} (\vu).
+\]
+
+Using these properties we can write 
+\[
+L_x^2(\vy)=g(\vx,\vy)\vx-g(\vx,\vx)\vy = L_{x \otimes x} (\vy) - g(\vx,\vx) I(\vy)
+\]
+where $I: \cV \to \cV$ is the identity map. So 
+\[
+L_x^2 = L_{x \otimes x} - g(\vx,\vx) I.
+\] 
+We can obtain the linearization of $L_x^2$ by writing 
+\begin{align*}
+    L_{x+h}^2(\vy) & = g(\vx+\vh,\vy)(\vx+\vh) - g(\vx+\vh,\vx+\vh) \vy \\
+    L_{x+h}^2 & = L_{x+h}L_{x+h} = L_x^2 + L_x L_h + L_h L_x + L_h^2
+\end{align*}
+The r.h.s. of the first equation expands to 
+\begin{align*}
+    L_{x+h}^2(\vy) & = g(\vx,\vy)\vx - g(\vx,\vx) \vy + g(\vx,\vy) \vh - g(\vx,\vh) \vy \\
+    & \kern2ex + g(\vh,\vy)\vx - g(\vh,\vx) \vy + g(\vh,\vy)\vh - g(\vh,\vh) \vy \\
+    & = L_x^2(\vy) + g(\vx,\vy) \vh - g(\vx,\vh) \vy + L_h^2(\vy). 
+\end{align*}
+We obtain 
+\[
+L_x L_h (\vy) + L_h L_x (\vy) = g(\vx,\vy)\vh - g(\vx,\vh) \vy + g(\vh,\vy)\vx - g(\vh,\vx)\vy. 
+\]
+If 
+\[
+L_x L_h (\vy) = g(\vx,\vy)\vh - g(\vx,\vh) \vy
+\]
+then 
+\[
+L_h L_x (\vy) = g(\vh,\vy)\vx - g(\vh,\vx)\vy.
+\]
+We can use the linearization of $L_x^2$ to perform the following derivation:
+\begin{align*}
+    \qty(L_{E(x,y)} + L_x L_y)(\vz) & =E(E(\vx,\vy),\vz) +L_x L y (\vz)  \\
+    & = -E(\vz,E(\vx,\vy))+ L_x L y (\vz) \\
+    & = - L_z L_x (\vy) +  L_x L y (\vz) \\ 
+    & = - \qty(g(\vz,\vy)\vx - g(\vz,\vx)\vy) + g(\vx,\vz)\vy - g(\vx,\vy) \vz \\
+    & = 2 g(\vx,\vz) \vy - g(\vz,\vy)\vx - g(\vx,\vy) \vz.
+\end{align*}
+This result can be used to write 
+\[
+    L_{E(x,y)} + L_x L_y = 2 \, \vy \otimes \vx - \vx \otimes \vy - g(\vx,\vy) I.
+\]
+From this equation we get 
+\begin{align*}
+    L_{E(x,y)} L_x + L_x L_y L_x & = 2 \, \vy \otimes \vx L_x - \vx \otimes \vy L_x - g(\vx,\vy) L_x \\
+    L_x L_y L_x & = - L_{E(x,y)} L_x + 2 \, \vy \otimes \vx L_x - \vx \otimes \vy L_x - g(\vx,\vy) L_x \\
+    L_x L_y L_x & = - L_{E(x,y)} L_x  - \vx \otimes E(\vy,\vx) - g(\vx,\vy) L_x
+\end{align*}
+since 
+\[
+(\vy \otimes \vx) L_x (\vz) = (\vy \otimes \vx) (E(\vx,\vz))=g(\vx,E(\vx,\vz))\vy=0,
+\]
+and 
+\[
+(\vx \otimes \vy) L_x (\vz) = (\vx \otimes \vy) E(\vx,\vz)=g(\vy,E(\vx,\vz))\vx=(\vx \otimes E(\vy,\vx))(\vz). 
+\]
+From the same equation 
+\begin{align*}
+    L_{E(x,y)} L_x & = - L_{E(E(x,y),x)} + 2 \vx \otimes E(\vx,\vy) - E(\vx,\vy)\otimes \vx - g(E(\vx,\vy),\vy) I \\
+    & = - L_{E(E(x,y),x)} + 2 \vx \otimes E(\vx,\vy) - E(\vx,\vy)\otimes \vx ;
+\end{align*}
+this produces a second equation for $L_xL_yL_x$:
+\begin{align*}
+    L_x L_y L_x & = - \qty(- L_{E(E(x,y),x)} + 2 \vx \otimes E(\vx,\vy) - E(\vx,\vy)\otimes \vx)  -  \vx \otimes E(\vy,\vx) - g(\vx,\vy) L_x \\
+    & = L_{E(E(x,y),x)} - 2 \vx \otimes E(\vx,\vy) + E(\vx,\vy)\otimes \vx -  \vx \otimes E(\vy,\vx) - g(\vx,\vy) L_x \\
+    & = L_{E(E(x,y),x)} - 2 \vx \otimes E(\vx,\vy) + E(\vx,\vy)\otimes \vx +  \vx \otimes E(\vx,\vy) - g(\vx,\vy) L_x  \\
+    & = L_{E(E(x,y),x)} -  \vx \otimes E(\vx,\vy) + E(\vx,\vy)\otimes \vx - g(\vx,\vy) L_x.
+\end{align*}
+Next 
+\[
+E(E(\vx,\vy),\vx)=-E(\vx,E(\vx,\vy))=-\qty(g(\vx,\vy)\vx-g(\vx,\vx)\vy)=g(\vx,\vx)\vy-g(\vx,\vy)\vx.
+\]
+Therefore
+\begin{align*}
+L_{E(E(x,y),x)}(\vz) & = E\qty(g(\vx,\vx)\vy-g(\vx,\vy)\vx,\vz)=g(\vx,\vx)E(\vy,\vz)-g(\vx,\vy)E(\vx,\vz) \\
+& =  g(\vx,\vx) L_y(\vz) - g(\vx,\vy) L_x(\vz).
+\end{align*}
+The third equation for $L_xL_yL_x$ is:
+\begin{align*}
+    L_x L_y L_x & = g(\vx,\vx) L_y -  g(\vx,\vy) L_x - \vx \otimes E(\vx,\vy) + E(\vx,\vy)\otimes \vx - g(\vx,\vy) L_x \\
+    & = g(\vx,\vx) L_y - 2  g(\vx,\vy) L_x - \vx \otimes E(\vx,\vy) + E(\vx,\vy)\otimes \vx .
+\end{align*}
+
+\bibliographystyle{plain} % We choose the "plain" reference style
+\bibliography{crossproductreferences} 
 \end{document}
