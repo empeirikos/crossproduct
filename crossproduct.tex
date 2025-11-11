@@ -15,8 +15,6 @@
     \geometry{paperheight=25cm,paperwidth=17cm,top=1.5cm,bottom=1.cm,left=1cm,right=1cm}
 }
 
-
-
 \fancypagestyle{main}{
 \fancyhf{}
 \addtolength{\topmargin}{-3.18243pt}
@@ -42,7 +40,11 @@
 \usepackage{amssymb}
 \allowdisplaybreaks
 \usepackage{mathtools}
-\usepackage{hyperref}
+
+%This is for hypertext references
+\usepackage{url}%this line and the next are related to hyperlinks
+\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+
 \usepackage{bm}
 %\usepackage{fdsymbol}
 \usepackage[skip=3ex, indent=0pt]{parskip}
