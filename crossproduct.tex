@@ -22,9 +22,7 @@
 
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\headheight}{23.5pt}
-%\usepackage{mathptmx}
-\usepackage{domitian}
-%\usepackage{notomath}
+\usepackage{mlmodern}
 \usepackage[T1]{fontenc}
 %\usepackage{newtxtext,newtxmath}
 \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
@@ -66,14 +64,17 @@
 
 \begin{document}
 \pagestyle{main}
+\begin{center}
+    \Large\bfseries Cross Products
+\end{center}
 Most of the material presented here is taken from \cite{elduque2004vector}.
 
 Given a finite dimensional vector space $\cV$ over a field $\F$ with characteristic zero and with an inner product $g: \cV \times \cV \to \F$ 
 define a bilinear map $E: \cV \times \cV \to \cV$ with the following properties:
-\begin{enumerate}[I,itemsep=0ex,parsep=1ex]
+\begin{enumerate}[label={\Roman*.},ref={\Roman*},itemsep=0ex,parsep=1ex]
     \item Bilinear property: $E(a\vx+b\vy,\vz)=aE(\vx,\vz)+bE(\vy,\vz)$,
     $E(\vx,a\vy+b\vz)=aE(\vx,\vy)+bE(\vx,\vz)$ where $\vx,\vy,\vz \in \cV$ and $a,b \in \F$. \label{num:bilinear}
-    \item Antisymmetric property: $g\qty(E(\vx,\vy),E(\vx,\vy))=\mqty|g(\vx,\vx) & g(\vx,\vy) \\ g(\vy,\vx) & g(\vy,\vy)|$ for all $\vx,\vy \in \cV$. 
+    \item Antisymmetric property: $$g\qty(E(\vx,\vy),E(\vx,\vy))=\mqty|g(\vx,\vx) & g(\vx,\vy) \\ g(\vy,\vx) & g(\vy,\vy)|$$ for all $\vx,\vy \in \cV$. 
     This is an expression of the antisymmetric property since \label{num:antisymmetric}
     \begin{align*}
     g\qty(E(\vx,\vy),E(\vy,\vx)) & =\mqty|g(\vx,\vy) & g(\vx,\vx) \\ g(\vy,\vy) & g(\vy,\vx)| 
@@ -87,11 +88,11 @@ We can use the bilinear map $E$ to induce a linear map $L_x: \cV \to \cV$ as fol
 \[
 L_x(\vy)=E(\vx,\vy), \; \text{for all $\vy \in \cV$}.
 \]
-This follows from (\ref{num:bilinear}). We note that 
+This follows from property \ref{num:bilinear}. We note that 
 \[
 L_x^2(\vy)=L_xE(\vx,\vy)=E(\vx,E(\vx,\vy)).
 \]
-From (\ref{num:antisymmetric}) we have  
+From property \ref{num:antisymmetric} we have  
 \begin{align*}
 g(E(\vx,E(\vx,\vy)),E(\vx,E(\vx,\vy))) & = \mqty|g(\vx,\vx) & g(\vx,E(\vx,\vy)) \\ g(E(\vx,\vy), \vx) & g(E(\vx,\vy),E(\vx,\vy))| \\
 & = \mqty|g(\vx,\vx) & 0 \\ 0 & g(E(\vx,\vy),E(\vx,\vy))| \\
@@ -190,7 +191,7 @@ L_x L_h (\vy) & = g(\vx,\vy)\vh - g(\vx,\vh) \vy \\
 & = - L_x L_y (\vh).
 \end{align*}
 
-We can use the linearization of $L_x^2$ to perform the following derivation:
+We can use the linearization of $L_x^2$ to complete the following derivation:
 \begin{align*}
     \qty(L_{E(x,y)} + L_x L_y)(\vz) & =E(E(\vx,\vy),\vz) +L_x L y (\vz)  \\
     & = -E(\vz,E(\vx,\vy))+ L_x L y (\vz) \\
@@ -210,14 +211,9 @@ From this equation we get
 \end{align}
 since 
 \[
-T_{y \otimes x} L_x (\vz) = T_{y \otimes x} (E(\vx,\vz))=g(\vx,E(\vx,\vz))\vy=0,
+T_{y \otimes x} L_x (\vz) = T_{y \otimes x} (E(\vx,\vz))=g(\vx,E(\vx,\vz))\vy=0.
 \]
-and 
-\[
-T_{x \otimes y} L_x (\vz) = T_{x \otimes y} E(\vx,\vz)=g(\vy,E(\vx,\vz))\vx  =g(\vz,E(\vy,\vz))\vx
-=T_{x \otimes E(y,x)}(\vz). 
-\]
-From the same equation 
+From (\ref{eq:Exy_xy}) 
 \begin{align*}
     L_{E(x,y)} L_x & = - L_{E(E(x,y),x)} + 2 T_{x \otimes E(x,y)} - T_{E(x,y)\otimes x} - g(E(\vx,\vy),\vy) I \\
     & = - L_{E(E(x,y),x)} + 2 T_{x \otimes E(x,y)} - T_{E(x,y)\otimes x} ;
@@ -312,19 +308,19 @@ Hence we conclude that
 
 If $f=L_x L_y$ then 
 \begin{align}
-    S(L_xL_y) & = - S(L_{E(x,y)}) + 2 S(T_{y \otimes x}) - S(T_{x \otimes y}) - g(\vx,\vy) S(I)  & \text{using (\ref{eq:Exy_xy})} \nonumber \\
-    & = -(d-4)L_{E(x,y)} + 2 S(T_{y \otimes x}) - S(T_{x \otimes y}) - g(\vx,\vy) S(I)  & \text{using (\ref{eq:Sy})} \nonumber \\
-    & = -(d-4)L_{E(x,y)} + 2 L_y L_x - L_x L_y - g(\vx,\vy) S(I)  & \text{using (\ref{eq:Sxoy})} \nonumber \\
-    & = -(d-4)L_{E(x,y)} + 2 L_y L_x - L_x L_y - (1-d) g(\vx,\vy) I  & \text{using (\ref{eq:SI})} . \label{eq:Sxy} 
+    S(L_xL_y) & = - S(L_{E(x,y)}) + 2 S(T_{y \otimes x}) - S(T_{x \otimes y}) - g(\vx,\vy) S(I)  && \text{using (\ref{eq:Exy_xy})} \nonumber \\
+    & = -(d-4)L_{E(x,y)} + 2 S(T_{y \otimes x}) - S(T_{x \otimes y}) - g(\vx,\vy) S(I)  && \text{using (\ref{eq:Sy})} \nonumber \\
+    & = -(d-4)L_{E(x,y)} + 2 L_y L_x - L_x L_y - g(\vx,\vy) S(I)  && \text{using (\ref{eq:Sxoy})} \nonumber \\
+    & = -(d-4)L_{E(x,y)} + 2 L_y L_x - L_x L_y - (1-d) g(\vx,\vy) I  && \text{using (\ref{eq:SI})} . \label{eq:Sxy} 
 \end{align}
 
-Using this derivation we can compute the following transformation: 
+Using these derivations we can compute the following transformation: 
 \[
 g = \sum_{i=1}^d \sum_{j=1}^d L_{e_i} \circ L_x \circ L_{e_j} \circ L_{e_i} \circ L_{e_j}. 
 \]
 First using $S(L_{e_i})=\sum_{j=1}^d L_{e_j} \circ L_{e_i} \circ L_{e_j}$ and (\ref{eq:Sy}) we have 
 \[
-g = \sum_{i=1}^d  L_{e_i} \circ L_x \circ (d-4) L_{e_i} = (d-4) S(L_x) = (d-4)^2 L_x.
+g = \sum_{i=1}^d  L_{e_i} \circ L_x \circ (d-4) L_{e_i} = (d-4) \sum_{i=1}^d  L_{e_i} \circ L_x \circ L_{e_i} = (d-4) S(L_x) = (d-4)^2 L_x.
 \]
 Another way of computing the same transformation is to write 
 \begin{align*}
@@ -366,7 +362,10 @@ which after summation w.r.t. $j$ is equal to $E(\vx,\vz)$. Therefore
 \end{align*}
 and so computing the transformation using this method we have 
 \begin{align*}
-g & = \qty(-(d-4)^2+2(d-4)-(1-d)-(1-d))L_x \\
+g & = \sum_{j=1}^d \qty(-(d-4)L_{E(x,\ve_j)} + 2 L_{e_j} L_x - L_x L_{e_j} - (1-d) g(\vx,\ve_j) I) \circ L_{e_j}  \\
+& = -(d-4) \underbrace{\sum_{j=1}^d L_{E(x,\ve_j)} L_{e_j}}_{(d-4)L_x} + 2  \underbrace{\sum_{j=1}^d L_{e_j} L_x L_{e_j}}_{ (d-4) L_x}
+- \underbrace{L_x \sum_{j=1}^d L_{e_j} L_{e_j}}_{(1-d)L_x} -(1-d) \underbrace{\sum_{j=1}^d g(\vx,\ve_j) I L_{e_j}}_{L_x} \\
+& = \qty(-(d-4)^2+2(d-4)-(1-d)-(1-d))L_x \\
 & = \qty(-(d-4)^2+2(d-4)-2(1-d))L_x
 \end{align*}
 Since both methods compute the same transformation we must have 
