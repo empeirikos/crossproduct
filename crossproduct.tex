@@ -1,7 +1,10 @@
 \documentclass[12pt]{article}
-\usepackage[paperheight=25cm,paperwidth=17cm,top=1.5cm,bottom=1.cm,left=1cm,right=1cm]{geometry}
+\usepackage[paperheight=25cm,paperwidth=29cm,top=1.5cm,bottom=1.cm,left=7cm,right=7cm,]{geometry}
+%\usepackage[paperheight=25cm,paperwidth=17cm,top=1.5cm,bottom=1.cm,left=7cm,right=7cm]{geometry}
 \usepackage{fancyhdr}
 \renewcommand{\subsectionmark}[1]{\markright{#1}}
+
+\usepackage{showkeys}
 
 \fancypagestyle{main}{
 \fancyhf{}
@@ -19,7 +22,8 @@
 
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\headheight}{23.5pt}
-\usepackage{mathptmx}
+%\usepackage{mathptmx}
+\usepackage{domitian}
 %\usepackage{notomath}
 \usepackage[T1]{fontenc}
 %\usepackage{newtxtext,newtxmath}
@@ -107,19 +111,17 @@ and
 L_x^2(\vy)=g(\vx,\vy)\vx-g(\vx,\vx)\vy.
 \]
 
-The tensor product $\vx \otimes \vy$ induces a linear map $L_{x \otimes y}: \cV \to \cV$ defined as 
+The tensor product $\vx \otimes \vy$ induces a linear map $T_{x \otimes y}: \cV \to \cV$ defined as 
 \begin{align*}
-(\vx \otimes \vy)(\vz) & = (x^i \ve_i \otimes y^j \ve_j) (\vz) =x^iy^j (\ve_i \otimes \ve_j)(\vz) \\
-& = x^iy^j z_j \ve_i = x^iy^j z^k g_{jk} \ve_i \\
-& = g(\vy,\vz) x^i \ve_i = g(\vy,\vz) \vx, \; \text{for all $\vz \in \cV$}. 
+T_{x \otimes y}(\vz) & =  g(\vy,\vz) \vx, \; \text{for all $\vz \in \cV$}. 
 \end{align*}
 From these definitions we can also generate the composite maps 
 \[
-L_{x \otimes y}L_z (\vu) = L_{x \otimes y} (E(\vz,\vu))=g(\vy,E(\vz,\vu))\vx 
+T_{x \otimes y}L_z (\vu) = T_{x \otimes y} (E(\vz,\vu))=g(\vy,E(\vz,\vu))\vx 
 \]
 and
 \begin{equation}
-L_{x}L_{y \otimes z} (\vu) = L_{x}(g(\vz,\vu)\vy)=g(\vz,\vu)E(\vx,\vy)=L_{E(x,y)\otimes z} \vu.
+L_{x}T_{y \otimes z} (\vu) = L_{x}(g(\vz,\vu)\vy)=g(\vz,\vu)E(\vx,\vy)=T_{E(x,y)\otimes z} \vu.
 \label{eq:xcrossytensorz}
 \end{equation}
 Note that since 
@@ -146,17 +148,17 @@ g(\vy,E(\vz,\vu)) = g(\vz,E(\vu,\vy))=g(\vu,E(\vy,\vz))
 \end{equation}
 and so
 \begin{equation}
-L_{x \otimes y}L_z (\vu) = g(\vu,E(\vy,\vz))\vx = L_{x \otimes E(y,z)} (\vu).
+T_{x \otimes y}L_z (\vu) = g(\vu,E(\vy,\vz))\vx = T_{x \otimes E(y,z)} (\vu).
 \label{eq:xtensorycrossz}
 \end{equation}
 
 Using these properties we can write 
 \[
-L_x^2(\vy)=g(\vx,\vy)\vx-g(\vx,\vx)\vy = L_{x \otimes x} (\vy) - g(\vx,\vx) I(\vy)
+L_x^2(\vy)=g(\vx,\vy)\vx-g(\vx,\vx)\vy = T_{x \otimes x} (\vy) - g(\vx,\vx) I(\vy)
 \]
 where $I: \cV \to \cV$ is the identity map. So 
 \[
-L_x^2 = L_{x \otimes x} - g(\vx,\vx) I.
+L_x^2 = T_{x \otimes x} - g(\vx,\vx) I.
 \] 
 We can obtain the linearization of $L_x^2$ by writing 
 \begin{align*}
@@ -198,33 +200,34 @@ We can use the linearization of $L_x^2$ to perform the following derivation:
 \end{align*}
 This result can be used to write 
 \begin{equation}
-    L_{E(x,y)} + L_x L_y = 2 \, \vy \otimes \vx - \vx \otimes \vy - g(\vx,\vy) I. \label{eq:Exy_xy}
+    L_{E(x,y)} + L_x L_y = 2  T_{y \otimes x} - T_{x \otimes y} - g(\vx,\vy) I. \label{eq:Exy_xy}
 \end{equation}
 From this equation we get 
 \begin{align}
-    L_{E(x,y)} L_x + L_x L_y L_x & = 2 \, \vy \otimes \vx L_x - \vx \otimes \vy L_x - g(\vx,\vy) L_x \nonumber\\
-    L_x L_y L_x & = - L_{E(x,y)} L_x + 2 \, \vy \otimes \vx L_x - \vx \otimes \vy L_x - g(\vx,\vy) L_x \nonumber\\
-    L_x L_y L_x & = - L_{E(x,y)} L_x  - \vx \otimes E(\vy,\vx) - g(\vx,\vy) L_x \label{eq:first}
+    L_{E(x,y)} L_x + L_x L_y L_x & = 2 T_{y \otimes x} L_x - T_{x \otimes y} L_x - g(\vx,\vy) L_x \nonumber\\
+    L_x L_y L_x & = - L_{E(x,y)} L_x + 2 T_{y \otimes x} L_x - T_{x \otimes y} L_x - g(\vx,\vy) L_x \nonumber\\
+    L_x L_y L_x & = - L_{E(x,y)} L_x  - T_{x \otimes E(y,x)} - g(\vx,\vy) L_x \label{eq:first}
 \end{align}
 since 
 \[
-(\vy \otimes \vx) L_x (\vz) = (\vy \otimes \vx) (E(\vx,\vz))=g(\vx,E(\vx,\vz))\vy=0,
+T_{y \otimes x} L_x (\vz) = T_{y \otimes x} (E(\vx,\vz))=g(\vx,E(\vx,\vz))\vy=0,
 \]
 and 
 \[
-(\vx \otimes \vy) L_x (\vz) = (\vx \otimes \vy) E(\vx,\vz)=g(\vy,E(\vx,\vz))\vx=(\vx \otimes E(\vy,\vx))(\vz). 
+T_{x \otimes y} L_x (\vz) = T_{x \otimes y} E(\vx,\vz)=g(\vy,E(\vx,\vz))\vx  =g(\vz,E(\vy,\vz))\vx
+=T_{x \otimes E(y,x)}(\vz). 
 \]
 From the same equation 
 \begin{align*}
-    L_{E(x,y)} L_x & = - L_{E(E(x,y),x)} + 2 \vx \otimes E(\vx,\vy) - E(\vx,\vy)\otimes \vx - g(E(\vx,\vy),\vy) I \\
-    & = - L_{E(E(x,y),x)} + 2 \vx \otimes E(\vx,\vy) - E(\vx,\vy)\otimes \vx ;
+    L_{E(x,y)} L_x & = - L_{E(E(x,y),x)} + 2 T_{x \otimes E(x,y)} - T_{E(x,y)\otimes x} - g(E(\vx,\vy),\vy) I \\
+    & = - L_{E(E(x,y),x)} + 2 T_{x \otimes E(x,y)} - T_{E(x,y)\otimes x} ;
 \end{align*}
 this produces a second equation for $L_xL_yL_x$:
 \begin{align}
-    L_x L_y L_x & = - \qty(- L_{E(E(x,y),x)} + 2 \vx \otimes E(\vx,\vy) - E(\vx,\vy)\otimes \vx)  -  \vx \otimes E(\vy,\vx) - g(\vx,\vy) L_x \nonumber\\
-    & = L_{E(E(x,y),x)} - 2 \vx \otimes E(\vx,\vy) + E(\vx,\vy)\otimes \vx -  \vx \otimes E(\vy,\vx) - g(\vx,\vy) L_x \nonumber\\
-    & = L_{E(E(x,y),x)} - 2 \vx \otimes E(\vx,\vy) + E(\vx,\vy)\otimes \vx +  \vx \otimes E(\vx,\vy) - g(\vx,\vy) L_x  \nonumber\\
-    & = L_{E(E(x,y),x)} -  \vx \otimes E(\vx,\vy) + E(\vx,\vy)\otimes \vx - g(\vx,\vy) L_x. \label{eq:second}
+    L_x L_y L_x & = - \qty(- L_{E(E(x,y),x)} + 2 T_{x \otimes E(x,y)} - T_{E(x,y)\otimes x} ) -  T_{x \otimes E(y,x)} - g(\vx,\vy) L_x \nonumber\\
+    & = L_{E(E(x,y),x)} - 2 T_{x \otimes E(x,y)} + T_{E(x,y)\otimes x} -  T_{x \otimes E(y,x)} - g(\vx,\vy) L_x \nonumber\\
+    & = L_{E(E(x,y),x)} - 2 T_{x \otimes E(x,y)} + T_{E(x,y)\otimes x} +  T_{x \otimes E(x,y)} - g(\vx,\vy) L_x  \nonumber\\
+    & = L_{E(E(x,y),x)} -  T_{x \otimes E(x,y)} + T_{E(x,y)\otimes x} - g(\vx,\vy) L_x. \label{eq:second}
 \end{align}
 Next 
 \[
@@ -237,8 +240,8 @@ L_{E(E(x,y),x)}(\vz) & = E\qty(g(\vx,\vx)\vy-g(\vx,\vy)\vx,\vz)=g(\vx,\vx)E(\vy,
 \end{align*}
 The third equation for $L_xL_yL_x$ is:
 \begin{align}
-    L_x L_y L_x & = g(\vx,\vx) L_y -  g(\vx,\vy) L_x - \vx \otimes E(\vx,\vy) + E(\vx,\vy)\otimes \vx - g(\vx,\vy) L_x \nonumber\\
-    & = g(\vx,\vx) L_y - 2  g(\vx,\vy) L_x - \vx \otimes E(\vx,\vy) + E(\vx,\vy)\otimes \vx . \label{eq:third}
+    L_x L_y L_x & = g(\vx,\vx) L_y -  g(\vx,\vy) L_x - T_{x \otimes E(x,y)} + T_{E(x,y)\otimes x} - g(\vx,\vy) L_x \nonumber\\
+    & = g(\vx,\vx) L_y - 2  g(\vx,\vy) L_x - T_{x \otimes E(x,y)} + T_{E(x,y)\otimes x} . \label{eq:third}
 \end{align}
 
 We choose an orthonormal basis $\qty{\ve_i}_{i=1}^d$ where $\dim \cV = d$. Define the following linear map $S: \End(\cV) \to \End(\cV)$
@@ -247,25 +250,25 @@ f \mapsto \sum_{i=1}^d L_{e_i} \circ f \circ L_{e_i}.
 \]
 If $f=I$ then 
 \[
-S(I)=\sum_{i=1}^d L_{e_i}^2 = \sum_{i=1}^d L_{e_i \otimes e_i} - \sum_{i=1}^d I = \sum_{i=1}^d L_{e_i \otimes e_i} -d I.
+S(I)=\sum_{i=1}^d L_{e_i}^2 = \sum_{i=1}^d T_{e_i \otimes e_i} - \sum_{i=1}^d I = \sum_{i=1}^d T_{e_i \otimes e_i} -d I.
 \]
 Since 
 \[
-\sum_{i=1}^d L_{e_i \otimes e_i} (\vx)= \sum_{i=1}^d g(\ve_i,\vx) \ve_i = \vx ,
+\sum_{i=1}^d T_{e_i \otimes e_i} (\vx)= \sum_{i=1}^d g(\ve_i,\vx) \ve_i = \vx ,
 \]
 \begin{equation}
 S(I) = (1-d)I.  \label{eq:SI}
 \end{equation}
 
-If $f=L_{x \otimes y}$ then using (\ref{eq:xcrossytensorz}) and (\ref{eq:xtensorycrossz})
+If $f=T_{x \otimes y}$ then 
 \begin{align*}
-    S(L_{x \otimes y}) & = \sum_{i=1}^d L_{e_i} \circ L_{x \otimes y}  \circ L_{e_i} \\
-    & = \sum_{i=1}^d L_{e_i} \circ L_{x \otimes E(y,e_i)} \\
-    & = \sum_{i=1}^d L_{E(e_i,x)\otimes E(y,e_i)}.
+    S(T_{x \otimes y}) & = \sum_{i=1}^d L_{e_i} \circ T_{x \otimes y}  \circ L_{e_i} \\
+    & = \sum_{i=1}^d L_{e_i} \circ T_{x \otimes E(y,e_i)} & \text{using (\ref{eq:xtensorycrossz})}\\
+    & = \sum_{i=1}^d T_{E(e_i,x)\otimes E(y,e_i)} & \text{using (\ref{eq:xcrossytensorz})}.
 \end{align*}
 Using (\ref{eq:cyclic})
 \begin{align*}
-L_{E(e_i,x)\otimes E(y,e_i)} (\vz) & = g(E(\vy,\ve_i),\vz) E(\ve_i,\vx) \\
+T_{E(e_i,x)\otimes E(y,e_i)} (\vz) & = g(E(\vy,\ve_i),\vz) E(\ve_i,\vx) \\
 & =  g(\vz,E(\vy,\ve_i)) E(\ve_i,\vx) \\
 & = g(\ve_i,E(\vz,\vy)) E(\ve_i,\vx) \\
 & = g(\ve_i,E(\vy,\vz)) E(\vx,\ve_i) \\
@@ -273,19 +276,19 @@ L_{E(e_i,x)\otimes E(y,e_i)} (\vz) & = g(E(\vy,\ve_i),\vz) E(\ve_i,\vx) \\
 \end{align*}
 which substituted back in the summation gives
 \begin{align*}
-    S(L_{x \otimes y}) & = \sum_{i=1}^d E\qty(\vx,g(\ve_i,E(\vy,\vz)) \ve_i) \\
+    S(T_{x \otimes y}) & = \sum_{i=1}^d E\qty(\vx,g(\ve_i,E(\vy,\vz)) \ve_i) \\
     & = E\qty(\vx,\sum_{i=1}^d g(\ve_i,E(\vy,\vz)) \ve_i) \\
     & = E(\vx,E(\vy,\vz)) = L_x L_y (\vz)
 \end{align*}
 and so
 \begin{equation}
-    S(L_{x \otimes y}) = L_x L_y \label{eq:Sxoy}.
+    S(T_{x \otimes y}) = L_x L_y \label{eq:Sxoy}.
 \end{equation}
 
 If $f=L_{y}$ then using (\ref{eq:third})
 \begin{align}
     S(L_y) & = \sum_{i=1}^d L_{e_i} \circ L_{y} \circ L(e_i) \\
-    & = \sum_{i=1}^d \qty(g(\ve_i,\ve_i) L_y - 2 g(\ve_i,\vy) L_{e_i} - \ve_i \otimes E(\ve_i,\vy) + E(\ve_i,\vy) \otimes \ve_i ).
+    & = \sum_{i=1}^d \qty(g(\ve_i,\ve_i) L_y - 2 g(\ve_i,\vy) L_{e_i} - T_{e_i \otimes E(e_i,y)} + T_{E(e_i,y) \otimes e_i}).
 \end{align}
 Since $g(\ve_i,\ve_i)=1$ the first term is simply $d L_y$; for the second term write 
 \begin{align*}
@@ -294,24 +297,24 @@ Since $g(\ve_i,\ve_i)=1$ the first term is simply $d L_y$; for the second term w
 \end{align*}
 For the third term 
 \begin{align*}
-\sum_{i=1}^d \ve_i \otimes E(\ve_i,\vy) (\vz) & = \sum_{i=1}^d g(\vz,E(\ve_i,\vy)) \ve_i = \sum_{i=1}^d g(\ve_i,E(\vy,\vz)) \ve_i \\
+\sum_{i=1}^d T_{e_i \otimes E(e_i,y)} (\vz) & = \sum_{i=1}^d g(\vz,E(\ve_i,\vy)) \ve_i = \sum_{i=1}^d g(\ve_i,E(\vy,\vz)) \ve_i \\
 & = E(\vy,\vz) = L_y (\vz).
 \end{align*}
 In a similar way the fourth term is 
 \begin{align*}
-    \sum_{i=1}^d  E(\ve_i,\vy) \otimes \ve_i (\vz) & = \sum_{i=1}^d  E(\ve_i,\vy) g(\vz,\ve_i) \\
+    \sum_{i=1}^d  T_{E(e_i,y) \otimes e_i} (\vz) & = \sum_{i=1}^d  E(\ve_i,\vy) g(\vz,\ve_i) \\
     & = E\qty(\sum_{i=1}^d g(\vz,\ve_i) \ve_i, \vy) = E(\vz,\vy) = - E(\vy,\vz) = - L_y (\vz).
 \end{align*}
 Hence we conclude that 
 \begin{equation}
-    S(L_y) = (d-4)L_y  \label{eq:Sy}.
+    S(L_y) = (d - 2 - 1 -1) L_y=(d-4)L_y  \label{eq:Sy}.
 \end{equation}
 
 If $f=L_x L_y$ then 
 \begin{align}
-    S(L_xL_y) & = - S(L_{E(x,y)}) + 2 S(L_{y \otimes x}) - S(L_{x \otimes y}) - g(\vx,\vy) S(I)  & \text{using (\ref{eq:Exy_xy})} \nonumber \\
-    & = -(d-4)L_{E(x,y)} + 2 S(L_{y \otimes x}) - S(L_{x \otimes y}) - g(\vx,\vy) S(I)  & \text{using (\ref{eq:Sy})} \nonumber \\
-    & = -(d-4)L_{E(x,y)} + 2 L_y L_x - Lx Ly - g(\vx,\vy) S(I)  & \text{using (\ref{eq:Sxoy})} \nonumber \\
+    S(L_xL_y) & = - S(L_{E(x,y)}) + 2 S(T_{y \otimes x}) - S(T_{x \otimes y}) - g(\vx,\vy) S(I)  & \text{using (\ref{eq:Exy_xy})} \nonumber \\
+    & = -(d-4)L_{E(x,y)} + 2 S(T_{y \otimes x}) - S(T_{x \otimes y}) - g(\vx,\vy) S(I)  & \text{using (\ref{eq:Sy})} \nonumber \\
+    & = -(d-4)L_{E(x,y)} + 2 L_y L_x - L_x L_y - g(\vx,\vy) S(I)  & \text{using (\ref{eq:Sxoy})} \nonumber \\
     & = -(d-4)L_{E(x,y)} + 2 L_y L_x - L_x L_y - (1-d) g(\vx,\vy) I  & \text{using (\ref{eq:SI})} . \label{eq:Sxy} 
 \end{align}
 
@@ -328,6 +331,7 @@ Another way of computing the same transformation is to write
 g & = \sum_{j=1}^d S(L_xL_{e_j}) \circ L_{e_j}  \\
 & = \sum_{j=1}^d \qty(-(d-4)L_{E(x,\ve_j)} + 2 L_{e_j} L_x - L_x L_{e_j} - (1-d) g(\vx,\ve_j) I) \circ L_{e_j}.
 \end{align*}
+using (\ref{eq:Sxy}).
 Starting from the last term we have 
 \[
 g(\vx,\ve_j) I \circ L_{e_j} (\vz) = g(\vx,\ve_j) L_{e_j} (\vz) = g(\vx,\ve_j) E(\ve_j,\vz)
@@ -336,13 +340,13 @@ which after applying the summation w.r.t. $j$ becomes
 \[
 \sum_{j=1}^d g(\vx,\ve_j) I \circ L_{e_j} (\vz) = E\qty(\sum_{j=1}^d g(\vx,\ve_j) \ve_j, \vz ) = E(\vx,\vz) = L_x(\vz).
 \]
-For $L_{e_j} L_x $ we have 
+For $L_{e_j} L_x $ using (\ref{eq:Sy}) we have 
 \[
-2 \sum_{j=1}^d  L_{e_j} L_x \circ L_{e_j} = 2 S(L_x) = 2 (d-4) L_x 
+2 \sum_{j=1}^d  L_{e_j} \circ L_x \circ L_{e_j} = 2 S(L_x) = 2 (d-4) L_x 
 \]
-while for $L_x L_{e_j}$ we have 
+while for $L_x L_{e_j}$ we have using (\ref{eq:SI})
 \[
-L_x \sum_{j=1}^d L_{e_j} \circ L_{e_j} = L_x S(I) = (1-d)L_x.
+L_x \sum_{j=1}^d L_{e_j} \circ L_{e_j} = L_x \sum_{j=1}^d L_{e_j} \circ I \circ L_{e_j} = L_x S(I) = (1-d)L_x.
 \]
 For $L_{E(x,\ve_j)}$ write using (\ref{eq:first})
 \begin{align*}
