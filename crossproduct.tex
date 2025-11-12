@@ -387,7 +387,55 @@ or
 (d-4)^2 - (d-4) - (d-1) = d^2 - 10 d + 21 = (d-3)(d-7)=0.
 \]
 
-
+For a vector space $\cV$ with $\dim \cV = 3$ given a linear map $\phi: \cV \to \cV$ define a linear map $\bar \phi \in \End(\cV)$
+\[
+\bar \phi E(\vx,\vy) = E(\phi\vx,\phi\vy).
+\]
+In this vector space the \emph{volume form} is (0,3) antisymmetric tensor
+\[
+\omega(\vx_1,\vx_2,\vx_3) = \epsilon_\sigma \omega(\vx_{\sigma(1)},\vx_{\sigma(2)},\vx_{\sigma(3)}) 
+\]
+where $\sigma \in S_3$ the symmetry group of permutations of $\{1,2,3\}$ and $\epsilon_\sigma=(-1)^{N(\sigma)}$
+where $N(\sigma)$ is the number of single transpositions that generate $\sigma$. Given a volume form, for $\phi \in \End(\cV)$
+\[
+\det(\phi) = \frac{\omega(\phi \ve_1, \phi \ve_2, \phi \ve_3)}{\omega( \ve_1, \ve_2,\ve_3)}
+\]
+where $\{ \ve_i \}_{i=1}^3$ is an orthonormal basis (we use an orthonormal basis to simplify the derivation
+with the standard property $\ve_1=E(\ve_2,\ve_3)$, $\ve_2=E(\ve_3,\ve_1)$, $\ve_3=E(\ve_1,\ve_2)$). 
+Define the volume form: 
+\[
+\omega(\vx_1,\vx_2,\vx_3)= g(\vx_1,E(\vx_2,\vx_3));
+\]
+We can use (\ref{eq:cyclic}) to show that the definition is antisymmetric. For example, 
+\begin{align*}
+\omega(\vx_3,\vx_2,\vx_1) & =g(\vx_3,E(\vx_2,\vx_1))=-g(\vx_3,E(\vx_1,\vx_2)) \\
+& =-g(\vx_1,E(\vx_2,\vx_3))=-\omega(\vx_1,\vx_2,\vx_3)
+\end{align*}
+with $123 \to 321$ requiring a single transposition. Combine this with the definition of the determinant:
+\begin{align*}
+\det(\phi) & = \frac{g(\phi \ve_1, E(\phi \ve_2, \phi \ve_3) )}{g( \ve_1, E(\ve_2,\ve_3))} 
+ = g(\phi \ve_1, E(\phi \ve_2, \phi \ve_3) ).
+\end{align*}
+From the definition of $\bar \phi$
+\[
+\det(\phi) = g(\phi \ve_1, \bar \phi E(\ve_2, \ve_3) ) = g(\phi \ve_1, \bar \phi \ve_1 ).
+\]
+The adjoint of $\phi$, $\phi^\ast$, is defined as the endomorphism with the property
+\[
+    g(\phi \ve_1, \bar \phi \ve_1 ) = g(\ve_1, \phi^\ast \bar \phi \ve_1 ) .
+\] 
+So we must have 
+\[
+    \det(\phi) =   g(\ve_1, \phi^\ast \bar \phi \ve_1 ) 
+\]
+which holds only if 
+\[
+    \phi^\ast \bar \phi = \det(\phi) I.
+\]
+This can be rewritten as 
+\[
+    \bar \phi = \det(\phi) \qty(\phi^\ast)^{-1}.
+\]
 
 \bibliographystyle{plain} % We choose the "plain" reference style
 \bibliography{crossproductreferences} 
