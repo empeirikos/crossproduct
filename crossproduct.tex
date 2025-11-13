@@ -414,10 +414,46 @@ and $f_3=\smqty(1 & 2 & 3 \\ 2 & 1 & 3)$. These are all odd permutations and,
 \end{align*}
 Given a volume form the definition of the determinant is
 \[
-\det(\phi) = \frac{\omega(\phi \ve_1, \phi \ve_2, \phi \ve_2)}{\omega(\ve_1,\ve_2,\ve_3)};
+\det(\phi) = \frac{\omega(\phi \ve_1, \phi \ve_2, \phi \ve_2)}{\omega(\ve_1,\ve_2,\ve_3)}
 \]
 where $\{ \ve_i \}_{i=1}^3$ is a basis of $\cV$.
-This is unique since the vector space of volume forms has dimension 1. This definition conforms with all 
+This is unique since the vector space of volume forms has dimension 1. It is also independent of the choice of 
+basis. To prove this choose a basis ${\tilde \ve}_i = \tensor{\Lambda}{^j_i}\ve_j$. Write 
+\[
+\det(\phi) = \frac{\omega(\phi \tilde\ve_1, \phi \tilde\ve_2, \phi \tilde\ve_2)}{\omega(\tilde\ve_1,\tilde\ve_2,\tilde\ve_3)} 
+= \frac{\omega(\phi \tensor{\Lambda}{^i_1}\ve_i, \phi \tensor{\Lambda}{^j_2}\ve_j, \phi \tensor{\Lambda}{^k_3}\ve_k)}
+{\omega(\tensor{\Lambda}{^i_1}\ve_i,\tensor{\Lambda}{^j_2}\ve_j,\tensor{\Lambda}{^k_3}\ve_k)}.
+\]
+Since the volume form is trilinear  
+\[
+\det(\phi) =
+\frac{\tensor{\Lambda}{^i_1}\tensor{\Lambda}{^j_2}\tensor{\Lambda}{^k_3}\omega(\phi \ve_i, \phi \ve_j, \phi \ve_k)}
+{\tensor{\Lambda}{^i_1}\tensor{\Lambda}{^j_2}\tensor{\Lambda}{^k_3}\omega(\ve_i,\ve_j,\ve_k)}.
+\]
+The only combinations of indices $i,j,k$ that do not set $\omega(\phi \ve_i, \phi \ve_j, \phi \ve_k)$, 
+$\omega(\ve_i,\ve_j,\ve_k)$ to zero are those in the symmetry group $S_3$. So  
+\begin{align*}
+\tensor{\Lambda}{^i_1}\tensor{\Lambda}{^j_2}\tensor{\Lambda}{^k_3}\omega(\phi \ve_i, \phi \ve_j, \phi \ve_k)
+& =\sum_\sigma 
+\tensor{\Lambda}{^{\sigma(1)}_1}\tensor{\Lambda}{^{\sigma(2)}_2}\tensor{\Lambda}{^{\sigma(3)}_3}
+\omega(\phi \ve_{\sigma(1)}, \phi \ve_{\sigma(2)}, \phi \ve_{\sigma(3)}) \\
+& = \sum_\sigma 
+\tensor{\Lambda}{^{\sigma(1)}_1}\tensor{\Lambda}{^{\sigma(2)}_2}\tensor{\Lambda}{^{\sigma(3)}_3}
+\epsilon_\sigma \omega(\phi \ve_{1}, \phi \ve_{2}, \phi \ve_{3}) \\
+& = K_\Lambda \omega(\phi \ve_{1}, \phi \ve_{2}, \phi \ve_{3}).
+\end{align*}
+In the same way, 
+\begin{align*}
+\tensor{\Lambda}{^i_1}\tensor{\Lambda}{^j_2}\tensor{\Lambda}{^k_3}\omega(\ve_i,\ve_j,\ve_k)
+& = K_\Lambda \omega( \ve_{1},  \ve_{2}, \ve_{3}).
+\end{align*}
+Therefore,
+\[
+\det(\phi) = \frac{\omega(\phi \tilde\ve_1, \phi \tilde\ve_2, \phi \tilde\ve_2)}{\omega(\tilde\ve_1,\tilde\ve_2,\tilde\ve_3)}
+= \frac{K_\Lambda\omega(\phi \ve_1, \phi \ve_2, \phi \ve_2)}{K_\Lambda\omega(\ve_1,\ve_2,\ve_3)}
+= \frac{\omega(\phi \ve_1, \phi \ve_2, \phi \ve_2)}{\omega(\ve_1,\ve_2,\ve_3)}.
+\]
+This definition conforms with all 
 the properties of a determinant. If $\phi$ is singular then $\{ \phi \ve_1, \phi \ve_2, \phi \ve_2\}$ are not
 independent vectors and so $\det(\phi)=0$ since $\omega(\phi \ve_1, \phi \ve_2, \phi \ve_2)=0$. 
 For two non-singular endomorphisms $\phi,\psi$
@@ -432,7 +468,7 @@ Using the volume form definition from (\ref{eq:R3volumeform})
 \det(\phi) & = \frac{g(\phi \ve_1, E(\phi \ve_2, \phi \ve_3) )}{g( \ve_1, E(\ve_2,\ve_3))} .
 \end{align*}
 Wlog, to simplify the derivations assume that $\{ \ve_i \}_{i=1}^3$ is the standard orthonormal basis 
-with $E(\ve_1,\ve_2)=\ve_3$, $E(\ve_2,\ve_3)=\ve_1$ and $E(\ve_3,\ve_1)=\ve_2$.  So we can write
+with $E(\ve_1,\ve_2)=\ve_3$, $E(\ve_2,\ve_3)=\ve_1$ and $E(\ve_3,\ve_1)=\ve_2$.  So 
 $$g( \ve_1, E(\ve_2,\ve_3))=g(\ve_1,\ve_1)=1.$$
 From the definition of $\bar \phi$
 \[
