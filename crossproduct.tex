@@ -442,7 +442,37 @@ $\omega(\ve_i,\ve_j,\ve_k)$ to zero are those in the symmetry group $S_3$. So
 \epsilon_\sigma \omega(\phi \ve_{1}, \phi \ve_{2}, \phi \ve_{3}) \\
 & = K_\Lambda \omega(\phi \ve_{1}, \phi \ve_{2}, \phi \ve_{3}).
 \end{align*}
-In the same way, 
+Note that since $\Lambda$ is a basis transformation tensor, ${\Lambda}_1,{\Lambda}_2,{\Lambda}_3$  
+are independent vectors and so $K_\Lambda \neq 0$. If, for example, $\Lambda_3=a^1\Lambda_1+a^2\Lambda_2$ then 
+\begin{align*}
+    \sum_\sigma \tensor{\Lambda}{^{\sigma(1)}_1}\tensor{\Lambda}{^{\sigma(2)}_2}\tensor{\Lambda}{^{\sigma(3)}_3}\epsilon_\sigma &= 
+    \sum_\sigma \tensor{\Lambda}{^{\sigma(1)}_1}\tensor{\Lambda}{^{\sigma(2)}_2} 
+    \qty(a^1\tensor{\Lambda}{^{\sigma(3)}_1}+a^2\tensor{\Lambda}{^{\sigma(3)}_2}) \\
+    & = a^1  \sum_\sigma \tensor{\Lambda}{^{\sigma(1)}_1}\tensor{\Lambda}{^{\sigma(2)}_2}\tensor{\Lambda}{^{\sigma(3)}_1}\epsilon_\sigma
+    + a^2  \sum_\sigma \tensor{\Lambda}{^{\sigma(1)}_1}\tensor{\Lambda}{^{\sigma(2)}_2}\tensor{\Lambda}{^{\sigma(3)}_2}\epsilon_\sigma.  
+\end{align*}
+In the first sum, interchanging the first and third elements in each product does not change the total. Another way of saying this is that
+\begin{equation} \label{eq:single-transposition}
+\sum_\sigma \tensor{\Lambda}{^{\sigma(1)}_1}\tensor{\Lambda}{^{\sigma(2)}_2}\tensor{\Lambda}{^{\sigma(3)}_1}\epsilon_\sigma
+=
+\sum_{\sigma} \tensor{\Lambda}{^{\tau\sigma(1)}_1}\tensor{\Lambda}{^{\tau\sigma(2)}_2}\tensor{\Lambda}{^{\tau\sigma(3)}_1}\epsilon_{\sigma}
+\end{equation} 
+where $\tau$ denotes this single transposition. However, if we apply this single transposition to all elements of $S_3$ we would still 
+obtain the same set of permutations. Therefore 
+\begin{equation} \label{eq:unchanged-group}
+\sum_\sigma \tensor{\Lambda}{^{\sigma(1)}_1}\tensor{\Lambda}{^{\sigma(2)}_2}\tensor{\Lambda}{^{\sigma(3)}_1}\epsilon_\sigma
+=
+\sum_\sigma \tensor{\Lambda}{^{\tau\sigma(1)}_1}\tensor{\Lambda}{^{\tau\sigma(2)}_2}\tensor{\Lambda}{^{\tau\sigma(3)}_1}\epsilon_{\tau\sigma}.
+\end{equation}
+Since $\epsilon_{\tau\sigma}=\epsilon_\tau \epsilon_\sigma=-\epsilon_\sigma$ combine (\ref{eq:single-transposition}) and (\ref{eq:unchanged-group})
+to obtain
+\[
+\sum_{\sigma} \tensor{\Lambda}{^{\tau\sigma(1)}_1}\tensor{\Lambda}{^{\tau\sigma(2)}_2}\tensor{\Lambda}{^{\tau\sigma(3)}_1}\epsilon_{\sigma}
+=-
+\sum_\sigma \tensor{\Lambda}{^{\tau\sigma(1)}_1}\tensor{\Lambda}{^{\tau\sigma(2)}_2}\tensor{\Lambda}{^{\tau\sigma(3)}_1}\epsilon_{\sigma}.
+\]
+Therefore the first sum is zero and the same procedure can be used to show that the second sum is also zero. Note that
+$K_\Lambda$ is the standard definition of the determinant of $\Lambda$ found in introductory textbooks. In the same way, 
 \begin{align*}
 \tensor{\Lambda}{^i_1}\tensor{\Lambda}{^j_2}\tensor{\Lambda}{^k_3}\omega(\ve_i,\ve_j,\ve_k)
 & = K_\Lambda \omega( \ve_{1},  \ve_{2}, \ve_{3}).
@@ -490,8 +520,7 @@ This can be rewritten as
 \[
     \bar \phi = \det(\phi) \qty(\phi^\ast)^{-1}.
 \]
-For a vector space like $\R^3$ we note that $\phi^\ast \equiv \phi^{\sf T}$ and so this equation 
-can be rewritten as $\bar \phi = \det(\phi) \phi^{-{\sf T}}$.
+For $\R^3$ we note that $\phi^\ast \equiv \phi^{\sf T}$ and so $\bar \phi = \det(\phi) \phi^{-{\sf T}}$.
 
 \bibliographystyle{plain} % We choose the "plain" reference style
 \bibliography{crossproductreferences} 
